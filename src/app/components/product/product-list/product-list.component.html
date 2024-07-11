@@ -22,14 +22,16 @@
       <td>{{item.description}}</td>
       <td>{{item.category?.name}}</td>
       <td>
+        <div class="d-flex justify-content-evenly align-items-center">
         <button type="button" (click)="showDetailModal(item,detailModal)" class="btn btn-secondary">
           <i class="fa-solid fa-eye white"
           ></i>
         </button>
-        <button type="button" class="btn btn-danger">
+        <button type="button" (click)="deleteProduct(item)" class="btn btn-danger">
           <i class="fa-solid fa-trash white"
           ></i>
         </button>
+        </div>
       </td> <!-- Actions -->
 
     </tr>
@@ -41,8 +43,10 @@
 
 <app-modal #detailModal>
 <app-product-form
+  (callParentEvent)="onFormEventCalled($event)"
   [title]="'Update Product'"
   [toUpdateProduct]="selectedItem"
+  [toUpdateCategory]="selectedItemCat"
 />
 </app-modal>
 
