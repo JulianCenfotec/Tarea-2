@@ -3,11 +3,15 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tarea-2": {
+    "demo-angular-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -17,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tarea-2",
+            "outputPath": "dist/demo-angular-front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,14 +34,10 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tarea-2:build:production"
+              "buildTarget": "demo-angular-front:build:production"
             },
             "development": {
-              "buildTarget": "tarea-2:build:development"
+              "buildTarget": "demo-angular-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "tarea-2:build"
+            "buildTarget": "demo-angular-front:build"
           }
         },
         "test": {
@@ -95,6 +95,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -102,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
