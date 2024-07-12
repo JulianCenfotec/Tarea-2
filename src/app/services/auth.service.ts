@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAuthority, ILoginResponse, IResponse, IUser } from '../interfaces';
+import {IAuthority, ILoginResponse, IResponse, IRoleType, IUser} from '../interfaces';
 import { Observable, firstValueFrom, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -79,7 +79,7 @@ export class AuthService {
       if(route.data && route.data.authorities) {
         if (this.hasAnyRole(route.data.authorities)) {
           permittedRoutes.unshift(route);
-        } 
+        }
       }
     }
     return permittedRoutes;
@@ -101,11 +101,21 @@ export class AuthService {
   }
 
   public areActionsAvailable (routeAuthorities: string[]): boolean {
-    let userAuthorities = this.getUserAuthorities() ? this.getUserAuthorities() : [];
-    let allowedUser: boolean | undefined = false;
-    routeAuthorities.forEach( (authority: string) => {
-      allowedUser = userAuthorities?.some(item => item.authority == authority);
-    })
-    return allowedUser;
+
+    let allowedUser: boolean = false;
+    let isAdmin: boolean = false;
+    let userAuthorities = this.getUserAuthorities();
+
+    for (const authority of routeAuthorities) {
+      if (userAuthorities?.some(item => item.authority == authority)) {
+        allowedUser = userAuthorities?.some(item => item.authority == authority);
+      }
+      if (allowedUser) break;
+    }
+      if (userAuthorities?.some(item => item.authority == IRoleType.superAdmin||item.authority == IRoleType.admin)) {
+        isAdmin = userAuthorities?.some(item => item.authority == IRoleType.superAdmin||item.authority == IRoleType.admin);
+      }
+
+    return allowedUser && isAdmin;
   }
 }

@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ModalComponent} from "../../modal/modal.component";
 import {ProductFormComponent} from "../../product/product-form/product-form.component";
 import {GamesFormComponent} from "../../game/games-form/games-form.component";
@@ -19,11 +19,18 @@ import {CategoryService} from "../../../services/category.service";
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.scss'
 })
-export class CategoryListComponent {
+export class CategoryListComponent implements OnChanges{
   @Input() itemList: ICategory[]= [];
+  @Input() areActionsAvailable: boolean = false;
   public selectedItem: ICategory = {};
   private categoryService = inject(CategoryService);
   public modalService = inject(NgbModal);
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['areActionsAvailable']) {
+      console.log('areActionsAvailable', this.areActionsAvailable);
+    }
+  }
 
   showDetailModal(item: ICategory, modal:any) {
     this.selectedItem= {...item};

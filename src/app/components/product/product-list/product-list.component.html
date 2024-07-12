@@ -8,7 +8,10 @@
       <th scope="col">Quantity</th>
       <th scope="col">Description</th>
       <th scope="col">Category Name</th>
-      <th scope="col">Actions</th>
+      @if (areActionsAvailable){
+        <th scope="col">Actions</th>
+      }
+
 
     </tr>
     </thead>
@@ -21,19 +24,20 @@
       <td>{{item.quantity}}</td>
       <td>{{item.description}}</td>
       <td>{{item.category?.name}}</td>
-      <td>
-        <div class="d-flex justify-content-evenly align-items-center">
-        <button type="button" (click)="showDetailModal(item,detailModal)" class="btn btn-secondary">
-          <i class="fa-solid fa-eye white"
-          ></i>
-        </button>
-        <button type="button" (click)="deleteProduct(item)" class="btn btn-danger">
-          <i class="fa-solid fa-trash white"
-          ></i>
-        </button>
-        </div>
-      </td> <!-- Actions -->
-
+      @if (areActionsAvailable){
+        <td>
+          <div class="d-flex justify-content-evenly align-items-center">
+            <button type="button" (click)="showDetailModal(item,detailModal)" class="btn btn-secondary">
+              <i class="fa-solid fa-eye white"
+              ></i>
+            </button>
+            <button type="button" (click)="deleteProduct(item)" class="btn btn-danger">
+              <i class="fa-solid fa-trash white"
+              ></i>
+            </button>
+          </div>
+        </td>
+      }
     </tr>
       }
     </tbody>

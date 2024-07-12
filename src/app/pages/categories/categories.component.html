@@ -13,6 +13,7 @@
         </div>
         <app-category-list
           [itemList]="categoryService.items$()"
+          [areActionsAvailable]="areActionsAvailable"
         />
       </div>
     } @loading (after 100ms; minimum 1s){

@@ -1,8 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {LoaderComponent} from "../../components/loader/loader.component";
 import {ModalComponent} from "../../components/modal/modal.component";
-import {ProductFormComponent} from "../../components/product/product-form/product-form.component";
-import {ProductListComponent} from "../../components/product/product-list/product-list.component";
 import {CategoryListComponent} from "../../components/category/category-list/category-list.component";
 import {CategoryFormComponent} from "../../components/category/category-form/category-form.component";
 import {CategoryService} from "../../services/category.service";
@@ -22,7 +20,7 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit{
   public modalService: NgbModal = inject(NgbModal);
   public categoryService = inject(CategoryService);
   public route: ActivatedRoute = inject(ActivatedRoute);

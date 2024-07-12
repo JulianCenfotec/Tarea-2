@@ -21,7 +21,7 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
+export class ProductsComponent  implements OnInit{
   public modalService: NgbModal = inject(NgbModal);
   public productService = inject(ProductService);
   public route: ActivatedRoute = inject(ActivatedRoute);
